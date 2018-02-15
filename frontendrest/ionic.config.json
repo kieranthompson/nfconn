@@ -1,0 +1,8 @@
+{
+  "name": "frontendrest",
+  "app_id": "0332bd47",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
