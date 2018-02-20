@@ -39,14 +39,13 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('http://54.88.11.212/localhost:3333/authenticate', creds, {headers: headers}).subscribe(data => {
+            this.http.post('http://54.88.11.212:3333/authenticate', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     this.storeUserCredentials(data.json().token);
                     resolve(true);
                 }
                 else
                     resolve(false);
-                    
             });
         });
     }
@@ -56,7 +55,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('http://54.88.11.212/localhost:3333/adduser', creds, {headers: headers}).subscribe(data => {
+            this.http.post('http://54.88.11.212:3333/adduser', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     resolve(true);
                 }
@@ -72,7 +71,7 @@ export class AuthService {
             this.loadUserCredentials();
             console.log(this.AuthToken);
             headers.append('Authorization', 'Bearer ' +this.AuthToken);
-            this.http.get('http://54.88.11.212/localhost:3333/getinfo', {headers: headers}).subscribe(data => {
+            this.http.get('http://54.88.11.212:3333/getinfo', {headers: headers}).subscribe(data => {
                 if(data.json().success)
                     resolve(data.json());
                 else
