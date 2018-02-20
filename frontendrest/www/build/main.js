@@ -422,7 +422,7 @@ var AuthService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
-            _this.http.post('http://54.88.11.212:3333/authenticate', creds, { headers: headers }).subscribe(function (data) {
+            _this.http.post('http://54.88.11.212/localhost:3333/authenticate', creds, { headers: headers }).subscribe(function (data) {
                 if (data.json().success) {
                     _this.storeUserCredentials(data.json().token);
                     resolve(true);
@@ -438,7 +438,7 @@ var AuthService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
-            _this.http.post('http://54.88.11.212:3333/adduser', creds, { headers: headers }).subscribe(function (data) {
+            _this.http.post('http://54.88.11.212/localhost:3333/adduser', creds, { headers: headers }).subscribe(function (data) {
                 if (data.json().success) {
                     resolve(true);
                 }
@@ -454,7 +454,7 @@ var AuthService = (function () {
             _this.loadUserCredentials();
             console.log(_this.AuthToken);
             headers.append('Authorization', 'Bearer ' + _this.AuthToken);
-            _this.http.get('http://localhost:3333/getinfo', { headers: headers }).subscribe(function (data) {
+            _this.http.get('http://54.88.11.212/localhost:3333/getinfo', { headers: headers }).subscribe(function (data) {
                 if (data.json().success)
                     resolve(data.json());
                 else
