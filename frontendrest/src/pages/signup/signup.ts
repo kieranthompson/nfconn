@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the SignupPage page.
@@ -29,6 +30,7 @@ export class SignupPage {
           buttons: ['ok']
         });
         alert.present();
+        this.navCtrl.setRoot(HomePage);
 
       }
     });

@@ -1,8 +1,11 @@
+import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
 import { HomePage } from '../home/home';
 import { NFC, Ndef } from '@ionic-native/nfc';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the UserpagePage page.
@@ -18,6 +21,11 @@ import { NFC, Ndef } from '@ionic-native/nfc';
 })
 export class UserPage {
 
+  granted: boolean;
+  denied: boolean;
+  scanned: boolean;
+  tagId: string;
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public authservice: AuthService,
@@ -26,18 +34,58 @@ export class UserPage {
               public ndef: Ndef) {
   }
 
-  nfcConnect() {
-    this.nfc.addNdefListener(() => {
-      console.log('successfully attached ndef listener');
-    }, (err) => {
-      console.log('error attaching ndef listener', err);
-    }).subscribe((event) => {
-      console.log('received ndef message. the tag contains: ', event.tag);
-      console.log('decoded tag id', this.nfc.bytesToHexString(event.tag.id));
-    
-      let message = this.ndef.textRecord(null, null, 'Hello world');
-      console.log(message);
+  resetScanData() {
+    this.granted = false;
+    this.scanned = false;
+    this.tagId = "";
+  }
+
+  ionViewDidEnter() {
+    this.nfc.enabled().then((resolve) => {
+      this.addListenNFC();
+      this.alertCtrl.create({
+        message: 'NFC is supported on this Device',
+        subTitle: 'Success'
+      });
+      alert('NFC IS SUPPORTED BY YOUR DEVICE');
+    }).catch((reject) => {
+      this.alertCtrl.create({
+        title: 'failure',
+        subTitle: 'could not authenticate user details',
+        buttons: ['ok']
+      });
+      alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
+      
     });
+  }
+
+  addListenNFC() {
+
+    this.nfc.addTagDiscoveredListener(nfcEvent => this.sesReadNFC(nfcEvent.tag)).subscribe(data => {
+      if (data && data.tag && data.tag.id) {
+        let tagId = this.nfc.bytesToHexString(data.tag.id);
+        if (tagId) {
+          this.tagId = tagId;
+          this.scanned = true;
+
+          // only testing data consider to ask web api for access
+          this.granted = [
+            "7d3c6179"
+          ].indexOf(tagId) != -1;
+
+        } else {
+          alert('NFC_NOT_DETECTED');
+        }
+      }
+    });
+  }
+
+  sesReadNFC(data): void {
+
+  }
+
+  failNFC(err) {
+    alert("Error while reading: Please Retry");
   }
 
   logout(): void {

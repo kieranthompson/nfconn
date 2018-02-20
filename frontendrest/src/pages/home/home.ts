@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
 import { UserPage } from '../userpage/userpage'; 
 import { SignupPage } from '../signup/signup';
@@ -11,7 +11,7 @@ import { SignupPage } from '../signup/signup';
 export class HomePage {
   usercreds: { name: '', password: '' };
   
-  constructor(public navCtrl: NavController, public authservice: AuthService) {
+  constructor(public navCtrl: NavController, public authservice: AuthService, private alertCtrl: AlertController) {
     this.usercreds = {
       name: '',
       password: ''
@@ -22,6 +22,11 @@ export class HomePage {
     this.authservice.authenticate(user).then(data => {
       if(data) {
         this.navCtrl.setRoot(UserPage);
+      } else {
+        this.alertCtrl.create({
+          subTitle: 'Failure',
+          message: 'Could not authenticate log in details'
+        });
       }
     })
   }

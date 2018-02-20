@@ -46,6 +46,7 @@ export class AuthService {
                 }
                 else
                     resolve(false);
+                    
             });
         });
     }
@@ -55,7 +56,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('http://localhost:3333/adduser', creds, {headers: headers}).subscribe(data => {
+            this.http.post('http://54.88.11.212:3333/adduser', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     resolve(true);
                 }
