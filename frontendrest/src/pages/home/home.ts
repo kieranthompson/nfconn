@@ -21,12 +21,13 @@ export class HomePage {
   login(user): void {
     this.authservice.authenticate(user).then(data => {
       if(data) {
-        this.navCtrl.setRoot(UserPage);
+        this.navCtrl.setRoot(UserPage, data);
       } else {
-        this.alertCtrl.create({
-          subTitle: 'Failure',
-          message: 'Could not authenticate log in details'
-        });
+        let failureAlert = this.alertCtrl.create({
+          title: 'Failure',
+          subTitle: 'Could not authenticate log in details',
+          buttons: ['ok']
+        }); failureAlert.present();
       }
     })
   }

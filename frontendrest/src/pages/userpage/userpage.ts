@@ -25,14 +25,13 @@ export class UserPage {
   denied: boolean;
   scanned: boolean;
   tagId: string;
+  username: string;
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public authservice: AuthService,
-              public alertCtrl: AlertController,
-              public nfc: NFC, 
-              public ndef: Ndef) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController, public nfc: NFC, public ndef: Ndef) {
+    this.username = this.navParams.get('user.name');
+    console.log(this.navParams.get('user.name'));
   }
+
 
   resetScanData() {
     this.granted = false;
@@ -43,17 +42,20 @@ export class UserPage {
   ionViewDidEnter() {
     this.nfc.enabled().then((resolve) => {
       this.addListenNFC();
-      this.alertCtrl.create({
-        message: 'NFC is supported on this Device',
-        subTitle: 'Success'
+      let successAlert = this.alertCtrl.create({
+        title: 'Success',
+        subTitle: 'logged in successfully'
       });
+      successAlert.present();
       alert('NFC IS SUPPORTED BY YOUR DEVICE');
     }).catch((reject) => {
-      this.alertCtrl.create({
+      let failureAlert = this.alertCtrl.create({
         title: 'failure',
         subTitle: 'could not authenticate user details',
         buttons: ['ok']
       });
+      failureAlert.present();
+      
       alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
       
     });

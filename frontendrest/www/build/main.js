@@ -101,6 +101,8 @@ var UserPage = (function () {
         this.alertCtrl = alertCtrl;
         this.nfc = nfc;
         this.ndef = ndef;
+        this.username = this.navParams.get('user.name');
+        console.log(this.navParams.get('user.name'));
     }
     UserPage.prototype.resetScanData = function () {
         this.granted = false;
@@ -111,17 +113,19 @@ var UserPage = (function () {
         var _this = this;
         this.nfc.enabled().then(function (resolve) {
             _this.addListenNFC();
-            _this.alertCtrl.create({
-                message: 'NFC is supported on this Device',
-                subTitle: 'Success'
+            var successAlert = _this.alertCtrl.create({
+                title: 'Success',
+                subTitle: 'logged in successfully'
             });
+            successAlert.present();
             alert('NFC IS SUPPORTED BY YOUR DEVICE');
         }).catch(function (reject) {
-            _this.alertCtrl.create({
+            var failureAlert = _this.alertCtrl.create({
                 title: 'failure',
                 subTitle: 'could not authenticate user details',
                 buttons: ['ok']
             });
+            failureAlert.present();
             alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
         });
     };
@@ -173,12 +177,7 @@ var UserPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/userpage/userpage.html"*/'<!--\n  Generated template for the UserpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n  <button ion-button (click)=\'nfcConnect()\'>nfc</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
     ], UserPage);
     return UserPage;
 }());
@@ -515,13 +514,15 @@ var HomePage = (function () {
         var _this = this;
         this.authservice.authenticate(user).then(function (data) {
             if (data) {
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__userpage_userpage__["a" /* UserPage */]);
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__userpage_userpage__["a" /* UserPage */], data);
             }
             else {
-                _this.alertCtrl.create({
-                    subTitle: 'Failure',
-                    message: 'Could not authenticate log in details'
+                var failureAlert = _this.alertCtrl.create({
+                    title: 'Failure',
+                    subTitle: 'Could not authenticate log in details',
+                    buttons: ['ok']
                 });
+                failureAlert.present();
             }
         });
     };
