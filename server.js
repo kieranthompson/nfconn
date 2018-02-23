@@ -21,7 +21,7 @@ mongoose.connection.on('open', function(){
     app.use(passport.initialize());
     require('./config/passport')(passport);
     
-    app.listen(3333, 'localhost', function(){
+    app.listen(3333, function(){
         console.log('server is running');
     })
 })

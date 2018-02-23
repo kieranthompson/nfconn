@@ -27,7 +27,7 @@ export class HomePage {
           title: 'Failure',
           subTitle: 'Could not authenticate log in details',
           buttons: ['ok']
-        }); failureAlert.present();
+        }).present();
       }
     })
   }

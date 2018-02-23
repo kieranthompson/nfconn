@@ -120,12 +120,6 @@ var UserPage = (function () {
             successAlert.present();
             alert('NFC IS SUPPORTED BY YOUR DEVICE');
         }).catch(function (reject) {
-            var failureAlert = _this.alertCtrl.create({
-                title: 'failure',
-                subTitle: 'could not authenticate user details',
-                buttons: ['ok']
-            });
-            failureAlert.present();
             alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
         });
     };
@@ -466,10 +460,9 @@ var AuthService = (function () {
     };
     AuthService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], AuthService);
     return AuthService;
-    var _a;
 }());
 
 //# sourceMappingURL=authservice.js.map
@@ -521,8 +514,7 @@ var HomePage = (function () {
                     title: 'Failure',
                     subTitle: 'Could not authenticate log in details',
                     buttons: ['ok']
-                });
-                failureAlert.present();
+                }).present();
             }
         });
     };

@@ -49,12 +49,6 @@ export class UserPage {
       successAlert.present();
       alert('NFC IS SUPPORTED BY YOUR DEVICE');
     }).catch((reject) => {
-      let failureAlert = this.alertCtrl.create({
-        title: 'failure',
-        subTitle: 'could not authenticate user details',
-        buttons: ['ok']
-      });
-      failureAlert.present();
       
       alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
       
