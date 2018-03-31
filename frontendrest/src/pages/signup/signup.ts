@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
 import { AuthService } from '../../services/authservice';
 import { HomePage } from '../home/home';
-
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,9 +10,16 @@ import { HomePage } from '../home/home';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  newcreds = {name: '', password: ''};
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController) {
+  newcreds = {name: '', password: '', wifi_ssid: '', wifi_password: ''};
+  networks: any;
+  constructor(public navParams: NavParams, public navCtrl: NavController, public authservice: AuthService, public alertCtrl: AlertController, private hotspot: Hotspot) {
     
+  }
+
+  ionViewDidLoad(){
+   this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
+    this.networks = networks;
+   });
   }
 
   register(user) {

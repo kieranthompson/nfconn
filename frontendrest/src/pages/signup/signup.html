@@ -23,6 +23,12 @@
     <ion-label floating>Password</ion-label>
     <ion-input [(ngModel)]='newcreds.password' type='password'></ion-input>
   </ion-item>
+  <ion-item>
+    
+    <ion-select placeholder="Choose Wireless Network" [(ngModel)]='newcreds.wifi_ssid'>
+      <ion-option *ngFor="let network of networks">{{network.SSID}}</ion-option>
+    </ion-select>
+  </ion-item>
  </ion-list>
  <button ion-button (click)='register(newcreds)'>Register</button>
 </ion-content>

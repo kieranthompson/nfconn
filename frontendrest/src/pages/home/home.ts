@@ -1,3 +1,4 @@
+import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
@@ -10,12 +11,14 @@ import { SignupPage } from '../signup/signup';
 })
 export class HomePage {
   usercreds: { name: '', password: '' };
+  homePage = HomePage;
   
   constructor(public navCtrl: NavController, public authservice: AuthService, private alertCtrl: AlertController) {
     this.usercreds = {
       name: '',
       password: ''
     }
+    
   }
 
   login(user): void {
@@ -23,12 +26,14 @@ export class HomePage {
       if(data) {
         this.navCtrl.setRoot(UserPage, data);
       } else {
-        let failureAlert = this.alertCtrl.create({
+        this.alertCtrl.create({
           title: 'Failure',
           subTitle: 'Could not authenticate log in details',
           buttons: ['ok']
         }).present();
       }
+    }).catch(err => {
+      
     })
   }
 

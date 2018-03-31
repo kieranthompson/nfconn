@@ -23,6 +23,6 @@ mongoose.connection.on('open', function(){
     
     app.listen(3333, function(){
         console.log('server is running');
-    })
-})
+    });
+});
 

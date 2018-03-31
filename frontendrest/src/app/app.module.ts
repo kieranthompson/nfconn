@@ -9,9 +9,11 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UserPage } from '../pages/userpage/userpage';
 import { SignupPage } from '../pages/signup/signup';
+
 import { AuthService } from '../services/authservice';
 
 import { NFC, Ndef } from '@ionic-native/nfc';
+import { Hotspot } from '@ionic-native/hotspot';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { NFC, Ndef } from '@ionic-native/nfc';
     AuthService,
     NFC,
     Ndef,
+    Hotspot,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

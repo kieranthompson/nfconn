@@ -21,33 +21,37 @@ var functions = {
                     } else {
                         return res.status(403).send({success: false, msg: 'Authenticaton failed, wrong password.'});
                     }
-                })
+                });
             }
             
-        })
+        });
     },
     addNew: function(req, res){
         if((!req.body.name) || (!req.body.password)){
             console.log(req.body.name);
             console.log(req.body.password);
+            console.log(req.body.wifi_ssid);
+            console.log(req.body.wifi_password);
             
             res.json({success: false, msg: 'Enter all values'});
         }
         else {
             var newUser = User({
                 name: req.body.name,
-                password: req.body.password
+                password: req.body.password,
+                wifi_ssid: req.body.wifi_ssid,
+                wifi_password: req.body.wifi_password
             });
             
             newUser.save(function(err, newUser){
                 if (err){
-                    res.json({success:false, msg:'Failed to save'})
+                    res.json({success:false, msg:'Failed to save'});
                 }
                 
                 else {
                     res.json({success:true, msg:'Successfully saved'});
                 }
-            })
+            });
         }
     },
     
@@ -63,6 +67,6 @@ var functions = {
     }
     
     
-}
+};
 
 module.exports = functions;

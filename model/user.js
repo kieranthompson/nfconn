@@ -9,6 +9,14 @@ var userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    wifi_ssid: {
+        type: String,
+        required: true
+    },
+    wifi_password: {
+        type: String,
+        required: true
     }
                             
 });

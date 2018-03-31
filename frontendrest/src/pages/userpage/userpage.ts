@@ -1,10 +1,8 @@
-import { SignupPage } from './../signup/signup';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
 import { HomePage } from '../home/home';
 import { NFC, Ndef } from '@ionic-native/nfc';
-import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 import { Observable } from 'rxjs/Observable';
 
 /**
@@ -101,9 +99,5 @@ export class UserPage {
     }
   });
 }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserpagePage');
-  }
 
 } 

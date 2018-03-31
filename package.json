@@ -1,5 +1,5 @@
 {
-  "name": "ionic-auth-demo",
+  "name": "nfconn",
   "version": "1.0.0",
   "description": "demo app",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "rajayogan",
+  "author": "kieranthompson",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^1.0.3",

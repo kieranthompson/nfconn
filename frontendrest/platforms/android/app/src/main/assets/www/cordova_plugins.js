@@ -29,6 +29,14 @@ module.exports = [
     "clobbers": [
       "window.Keyboard"
     ]
+  },
+  {
+    "id": "cordova-plugin-hotspot.HotSpotPlugin",
+    "file": "plugins/cordova-plugin-hotspot/www/HotSpotPlugin.js",
+    "pluginId": "cordova-plugin-hotspot",
+    "clobbers": [
+      "cordova.plugins.hotspot"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -39,7 +47,8 @@ module.exports.metadata =
   "cordova-plugin-device": "2.0.1",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-ionic-webview": "1.1.16",
-  "cordova-plugin-ionic-keyboard": "2.0.5"
+  "cordova-plugin-ionic-keyboard": "2.0.5",
+  "cordova-plugin-hotspot": "1.2.10"
 };
 // BOTTOM OF METADATA
 });

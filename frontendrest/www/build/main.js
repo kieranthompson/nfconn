@@ -1,4 +1,4 @@
-webpackJsonp([2],{
+webpackJsonp([5],{
 
 /***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -7,8 +7,9 @@ webpackJsonp([2],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authservice__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_hotspot__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_authservice__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -22,20 +23,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the SignupPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 var SignupPage = (function () {
-    function SignupPage(navCtrl, navParams, authservice, alertCtrl) {
-        this.navCtrl = navCtrl;
+    function SignupPage(navParams, navCtrl, authservice, alertCtrl, hotspot) {
         this.navParams = navParams;
+        this.navCtrl = navCtrl;
         this.authservice = authservice;
         this.alertCtrl = alertCtrl;
-        this.newcreds = { name: '', password: '' };
+        this.hotspot = hotspot;
+        this.newcreds = { name: '', password: '', wifi_ssid: '', wifi_password: '' };
     }
+    SignupPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.hotspot.scanWifi().then(function (networks) {
+            _this.networks = networks;
+        });
+    };
     SignupPage.prototype.register = function (user) {
         var _this = this;
         this.authservice.adduser(user).then(function (data) {
@@ -46,15 +49,15 @@ var SignupPage = (function () {
                     buttons: ['ok']
                 });
                 alert_1.present();
-                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
             }
         });
     };
     SignupPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n </ion-list>\n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/signup/signup.html"*/,
+            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n  <ion-item>\n    \n    <ion-select placeholder="Choose Wireless Network" [(ngModel)]=\'newcreds.wifi_ssid\'>\n      <ion-option *ngFor="let network of networks">{{network.SSID}}</ion-option>\n    </ion-select>\n  </ion-item>\n </ion-list>\n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_hotspot__["a" /* Hotspot */]])
     ], SignupPage);
     return SignupPage;
 }());
@@ -70,9 +73,9 @@ var SignupPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authservice__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authservice__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__ = __webpack_require__(159);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -164,12 +167,9 @@ var UserPage = (function () {
             }
         });
     };
-    UserPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad UserpagePage');
-    };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/userpage/userpage.html"*/'<!--\n  Generated template for the UserpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n  <button ion-button (click)=\'nfcConnect()\'>nfc</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/userpage/userpage.html"*/,
+            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<!--\n  Generated template for the UserpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
     ], UserPage);
@@ -201,12 +201,24 @@ webpackEmptyAsyncContext.id = 114;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"../pages/settings/settings.module": [
+		277,
+		2
+	],
 	"../pages/signup/signup.module": [
-		276,
+		278,
+		4
+	],
+	"../pages/tabs/tabs.module": [
+		279,
 		1
 	],
 	"../pages/userpage/userpage.module": [
-		277,
+		280,
+		3
+	],
+	"../pages/wifilist/wifilist.module": [
+		281,
 		0
 	]
 };
@@ -226,13 +238,13 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 200:
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(224);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(225);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -240,7 +252,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 224:
+/***/ 225:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -249,20 +261,22 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_userpage_userpage__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_signup_signup__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_authservice__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_nfc__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_authservice__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_nfc__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_hotspot__ = __webpack_require__(157);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -291,8 +305,11 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
                     links: [
+                        { loadChildren: '../pages/settings/settings.module#SettingsPageModule', name: 'SettingsPage', segment: 'settings', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/userpage/userpage.module#UserpagePageModule', name: 'UserPage', segment: 'userpage', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/tabs/tabs.module#TabsPageModule', name: 'TabsPage', segment: 'tabs', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/userpage/userpage.module#UserpagePageModule', name: 'UserPage', segment: 'userpage', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/wifilist/wifilist.module#WifilistPageModule', name: 'WifilistPage', segment: 'wifilist', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],
@@ -309,6 +326,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_10__services_authservice__["a" /* AuthService */],
                 __WEBPACK_IMPORTED_MODULE_11__ionic_native_nfc__["a" /* NFC */],
                 __WEBPACK_IMPORTED_MODULE_11__ionic_native_nfc__["b" /* Ndef */],
+                __WEBPACK_IMPORTED_MODULE_12__ionic_native_hotspot__["a" /* Hotspot */],
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
@@ -320,16 +338,16 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 275:
+/***/ 276:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -355,7 +373,7 @@ var MyApp = (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/kieran/Desktop/final_year_project/frontendrest/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/kieran/Desktop/final_year_project/frontendrest/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -366,7 +384,7 @@ var MyApp = (function () {
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -415,7 +433,7 @@ var AuthService = (function () {
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
-            _this.http.post('http://localhost:3333/authenticate', creds, { headers: headers }).subscribe(function (data) {
+            _this.http.post('http://54.88.11.212:3333/authenticate', creds, { headers: headers }).subscribe(function (data) {
                 if (data.json().success) {
                     _this.storeUserCredentials(data.json().token);
                     resolve(true);
@@ -427,11 +445,11 @@ var AuthService = (function () {
     };
     AuthService.prototype.adduser = function (user) {
         var _this = this;
-        var creds = "name=" + user.name + "&password=" + user.password;
+        var creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid + "&wifi_password=" + user.wifi_password;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
-            _this.http.post('http://localhost:3333/adduser', creds, { headers: headers }).subscribe(function (data) {
+            _this.http.post('http://54.88.11.212:3333/adduser', creds, { headers: headers }).subscribe(function (data) {
                 if (data.json().success) {
                     resolve(true);
                 }
@@ -447,7 +465,7 @@ var AuthService = (function () {
             _this.loadUserCredentials();
             console.log(_this.AuthToken);
             headers.append('Authorization', 'Bearer ' + _this.AuthToken);
-            _this.http.get('http://localhost:3333/getinfo', { headers: headers }).subscribe(function (data) {
+            _this.http.get('http://54.88.11.212:3333/getinfo', { headers: headers }).subscribe(function (data) {
                 if (data.json().success)
                     resolve(data.json());
                 else
@@ -469,14 +487,14 @@ var AuthService = (function () {
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authservice__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authservice__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__userpage_userpage__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__signup_signup__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -498,11 +516,13 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.authservice = authservice;
         this.alertCtrl = alertCtrl;
+        this.homePage = HomePage_1;
         this.usercreds = {
             name: '',
             password: ''
         };
     }
+    HomePage_1 = HomePage;
     HomePage.prototype.login = function (user) {
         var _this = this;
         this.authservice.authenticate(user).then(function (data) {
@@ -510,29 +530,31 @@ var HomePage = (function () {
                 _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__userpage_userpage__["a" /* UserPage */], data);
             }
             else {
-                var failureAlert = _this.alertCtrl.create({
+                _this.alertCtrl.create({
                     title: 'Failure',
                     subTitle: 'Could not authenticate log in details',
                     buttons: ['ok']
                 }).present();
             }
+        }).catch(function (err) {
         });
     };
     HomePage.prototype.signup = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__signup_signup__["a" /* SignupPage */]);
     };
-    HomePage = __decorate([
+    HomePage = HomePage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      NFConn\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class=\'home\'>\n  <ion-list>\n    <ion-item>\n      <ion-label floating>username</ion-label>\n      <ion-input [(ngModel)] = \'usercreds.name\' type=\'text\'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>password</ion-label>\n      <ion-input [(ngModel)]=\'usercreds.password\' type=\'password\'></ion-input>\n    </ion-item>\n  </ion-list>\n  <button ion-button (click)=\'login(usercreds)\'>Login</button>\n  <button ion-button (click)=\'signup()\'>Sign up</button>\n  <hr>\n  <small>developed by Kieran Thompson</small>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/final_year_project/frontendrest/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      NFConn\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class=\'home\'>\n  <ion-list>\n    <ion-item>\n      <ion-label floating>username</ion-label>\n      <ion-input [(ngModel)] = \'usercreds.name\' type=\'text\'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>password</ion-label>\n      <ion-input [(ngModel)]=\'usercreds.password\' type=\'password\'></ion-input>\n    </ion-item>\n  </ion-list>\n  <button ion-button (click)=\'login(usercreds)\'>Login</button>\n  <button ion-button (click)=\'signup()\'>Sign up</button>\n  <hr>\n  <small>developed by Kieran Thompson</small>\n</ion-content> '/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HomePage);
     return HomePage;
+    var HomePage_1;
 }());
 
 //# sourceMappingURL=home.js.map
 
 /***/ })
 
-},[200]);
+},[201]);
 //# sourceMappingURL=main.js.map
