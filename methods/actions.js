@@ -27,7 +27,7 @@ var functions = {
         });
     },
     addNew: function(req, res){
-        if((!req.body.name) || (!req.body.password)){
+        if((!req.body.name) || (!req.body.password) || (!req.body.wifi_ssid) || (!req.body.wifi_password)){
             console.log(req.body.name);
             console.log(req.body.password);
             console.log(req.body.wifi_ssid);
@@ -59,7 +59,7 @@ var functions = {
         if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1];
             var decodedtoken = jwt.decode(token, config.secret);
-            return res.json({success: true, msg: 'hello '+decodedtoken.name});
+            return res.json({success: true, msg: 'hello '+decodedtoken.name, name: decodedtoken.name, wifi_ssid: decodedtoken.wifi_ssid});
         }
         else {
             return res.json({success:false, msg: 'No header'});

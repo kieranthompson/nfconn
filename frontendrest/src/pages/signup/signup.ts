@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
 import { AuthService } from '../../services/authservice';
@@ -14,6 +14,9 @@ export class SignupPage {
   networks: any;
   constructor(public navParams: NavParams, public navCtrl: NavController, public authservice: AuthService, public alertCtrl: AlertController, private hotspot: Hotspot) {
     
+  }
+  OnInit() {
+
   }
 
   ionViewDidLoad(){
@@ -35,6 +38,10 @@ export class SignupPage {
 
       }
     });
+  }
+
+  setWifiCredentials(wifi_ssid) {
+    this.newcreds.wifi_ssid = wifi_ssid;
   }
 
 }

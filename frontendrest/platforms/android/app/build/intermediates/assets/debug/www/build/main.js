@@ -33,6 +33,8 @@ var SignupPage = (function () {
         this.hotspot = hotspot;
         this.newcreds = { name: '', password: '', wifi_ssid: '', wifi_password: '' };
     }
+    SignupPage.prototype.OnInit = function () {
+    };
     SignupPage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.hotspot.scanWifi().then(function (networks) {
@@ -53,9 +55,12 @@ var SignupPage = (function () {
             }
         });
     };
+    SignupPage.prototype.setWifiCredentials = function (wifi_ssid) {
+        this.newcreds.wifi_ssid = wifi_ssid;
+    };
     SignupPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n\n  <!-- <ion-item>\n    <ion-select floating placeholder="Choose Wireless Network">\n      <ion-option *ngFor="let network of networks" [(ngModel)]=\'newcreds.wifi_ssid\'>{{network.SSID}}</ion-option>\n    </ion-select>\n  </ion-item> -->\n </ion-list>\n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/,
+            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n\n  <!-- <ion-item>\n    <ion-label floating>Wifi Network Name</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.wifi_ssid\' type=\'text\'></ion-input>\n  </ion-item> -->\n\n  <ion-item>\n    <ion-select floating placeholder="Choose Wireless Network" [(ngModel)]=\'newcreds.wifi_ssid\' (ionChange)="setWifiCredentials(newcreds.wifi_ssid)">\n      <ion-option *ngFor="let network of networks" [value]="network.SSID">{{network.SSID}}</ion-option>\n    </ion-select>\n  </ion-item>\n </ion-list>\n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_hotspot__["a" /* Hotspot */]])
     ], SignupPage);
@@ -445,7 +450,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.adduser = function (user) {
         var _this = this;
-        var creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid + "&wifi_password=" + user.wifi_password;
+        var creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
