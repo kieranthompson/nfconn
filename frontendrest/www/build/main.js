@@ -109,8 +109,6 @@ var UserPage = (function () {
         this.alertCtrl = alertCtrl;
         this.nfc = nfc;
         this.ndef = ndef;
-        this.user.name = this.navParams.get('user.name');
-        console.log(this.navParams.get('user.name'));
     }
     UserPage.prototype.resetScanData = function () {
         this.granted = false;
@@ -129,12 +127,6 @@ var UserPage = (function () {
             alert('NFC IS SUPPORTED BY YOUR DEVICE');
         }).catch(function (reject) {
             alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
-        });
-        this.authservice.getinfo().then(function (data) {
-            if (data.success) {
-                _this.user.name = data.name;
-                _this.user.ssid = data.wifi_ssid;
-            }
         });
     };
     UserPage.prototype.addListenNFC = function () {
@@ -169,22 +161,23 @@ var UserPage = (function () {
         var _this = this;
         this.authservice.getinfo().then(function (data) {
             if (data.success) {
-                var alert_1 = _this.alertCtrl.create({
+                var alert = _this.alertCtrl.create({
                     title: data.success,
                     subTitle: data.msg,
                     buttons: ['ok']
                 });
-                alert_1.present(alert_1);
+                alert.present(alert);
             }
         });
     };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.ssid}}</p>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
+            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <!-- <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.wifi_ssid}}</p> -->\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]) === "function" && _f || Object])
     ], UserPage);
     return UserPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=userpage.js.map
