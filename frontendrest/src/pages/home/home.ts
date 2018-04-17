@@ -10,7 +10,7 @@ import { SignupPage } from '../signup/signup';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  usercreds: { name: '', password: '' };
+  usercreds: { name: '', password: ''};
   homePage = HomePage;
   
   constructor(public navCtrl: NavController, public authservice: AuthService, private alertCtrl: AlertController) {
@@ -21,21 +21,13 @@ export class HomePage {
     
   }
 
-  login(user): void {
+  login(user) {
     this.authservice.authenticate(user).then(data => {
-      if(data) {
-        this.navCtrl.setRoot(UserPage, data);
-      } else {
-        this.alertCtrl.create({
-          title: 'Failure',
-          subTitle: 'Could not authenticate log in details',
-          buttons: ['ok']
-        }).present();
-      }
-    }).catch(err => {
-      
-    })
-  }
+        if(data) {
+            this.navCtrl.setRoot(UserPage, data);
+        }
+});
+}
 
   signup() {
     this.navCtrl.push(SignupPage);

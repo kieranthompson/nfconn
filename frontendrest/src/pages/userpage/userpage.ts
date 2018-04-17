@@ -23,10 +23,13 @@ export class UserPage {
   denied: boolean;
   scanned: boolean;
   tagId: string;
-  username: string;
+  user: {
+    name: string,
+    ssid : string
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController, public nfc: NFC, public ndef: Ndef) {
-    this.username = this.navParams.get('user.name');
+    this.user.name = this.navParams.get('user.name');
     console.log(this.navParams.get('user.name'));
   }
 
@@ -50,6 +53,13 @@ export class UserPage {
       
       alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
       
+    });
+
+    this.authservice.getinfo().then((data: any) => {
+      if(data.success) {
+        this.user.name = data.name;
+        this.user.ssid = data.wifi_ssid;
+      }
     });
   }
 

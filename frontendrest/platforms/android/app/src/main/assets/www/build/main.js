@@ -60,7 +60,7 @@ var SignupPage = (function () {
     };
     SignupPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/'<!--\n  Generated template for the SignupPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n\n  <!-- <ion-item>\n    <ion-label floating>Wifi Network Name</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.wifi_ssid\' type=\'text\'></ion-input>\n  </ion-item> -->\n\n  <ion-item>\n    <ion-select floating placeholder="Choose Wireless Network" [(ngModel)]=\'newcreds.wifi_ssid\' (ionChange)="setWifiCredentials(newcreds.wifi_ssid)">\n      <ion-option *ngFor="let network of networks" [value]="network.SSID">{{network.SSID}}</ion-option>\n    </ion-select>\n  </ion-item>\n </ion-list>\n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/signup/signup.html"*/,
+            selector: 'page-signup',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/signup/signup.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>signup</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n <ion-list>\n   <ion-item>\n    <ion-label floating>Username</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.name\' type=\'text\'></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input [(ngModel)]=\'newcreds.password\' type=\'password\'></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating> Wireless Networks</ion-label>\n    <ion-select floating [(ngModel)]=\'newcreds.wifi_ssid\' (ionChange)="setWifiCredentials(newcreds.wifi_ssid)">\n      <ion-option *ngFor="let network of networks" [value]="network.SSID">{{network.SSID}}</ion-option>\n    </ion-select>\n  </ion-item>\n  \n  <ion-item>\n      <ion-label floating>Wireless Password</ion-label>\n      <ion-input [(ngModel)]="newcreds.wifi_password" type="password"></ion-input>\n    </ion-item>\n </ion-list>\n\n \n <button ion-button (click)=\'register(newcreds)\'>Register</button>\n\n \n</ion-content>\n\n\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/signup/signup.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_3__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_hotspot__["a" /* Hotspot */]])
     ], SignupPage);
@@ -109,7 +109,7 @@ var UserPage = (function () {
         this.alertCtrl = alertCtrl;
         this.nfc = nfc;
         this.ndef = ndef;
-        this.username = this.navParams.get('user.name');
+        this.user.name = this.navParams.get('user.name');
         console.log(this.navParams.get('user.name'));
     }
     UserPage.prototype.resetScanData = function () {
@@ -129,6 +129,12 @@ var UserPage = (function () {
             alert('NFC IS SUPPORTED BY YOUR DEVICE');
         }).catch(function (reject) {
             alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
+        });
+        this.authservice.getinfo().then(function (data) {
+            if (data.success) {
+                _this.user.name = data.name;
+                _this.user.ssid = data.wifi_ssid;
+            }
         });
     };
     UserPage.prototype.addListenNFC = function () {
@@ -174,7 +180,7 @@ var UserPage = (function () {
     };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<!--\n  Generated template for the UserpagePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
+            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.ssid}}</p>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
     ], UserPage);
@@ -378,7 +384,7 @@ var MyApp = (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -450,7 +456,7 @@ var AuthService = (function () {
     };
     AuthService.prototype.adduser = function (user) {
         var _this = this;
-        var creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid;
+        var creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid + "&wifi_password=" + user.wifi_password;
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return new Promise(function (resolve) {
@@ -534,14 +540,6 @@ var HomePage = (function () {
             if (data) {
                 _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__userpage_userpage__["a" /* UserPage */], data);
             }
-            else {
-                _this.alertCtrl.create({
-                    title: 'Failure',
-                    subTitle: 'Could not authenticate log in details',
-                    buttons: ['ok']
-                }).present();
-            }
-        }).catch(function (err) {
         });
     };
     HomePage.prototype.signup = function () {
@@ -549,7 +547,7 @@ var HomePage = (function () {
     };
     HomePage = HomePage_1 = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      NFConn\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class=\'home\'>\n  <ion-list>\n    <ion-item>\n      <ion-label floating>username</ion-label>\n      <ion-input [(ngModel)] = \'usercreds.name\' type=\'text\'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>password</ion-label>\n      <ion-input [(ngModel)]=\'usercreds.password\' type=\'password\'></ion-input>\n    </ion-item>\n  </ion-list>\n  <button ion-button (click)=\'login(usercreds)\'>Login</button>\n  <button ion-button (click)=\'signup()\'>Sign up</button>\n  <hr>\n  <small>developed by Kieran Thompson</small>\n</ion-content> '/*ion-inline-end:"/Users/kieran/Desktop/projects/finalyearproject/frontendrest/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      NFConn\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding class=\'home\'>\n  <ion-list>\n    <ion-item>\n      <ion-label floating>username</ion-label>\n      <ion-input [(ngModel)]=\'usercreds.name\' type=\'text\'></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>password</ion-label>\n      <ion-input [(ngModel)]=\'usercreds.password\' type=\'password\'></ion-input>\n    </ion-item>\n  </ion-list>\n  <button ion-button (click)=\'login(usercreds)\'>Login</button>\n  <button ion-button (click)=\'signup()\'>Sign up</button>\n  <hr>\n  <small>developed by Kieran Thompson</small>\n</ion-content> '/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
     ], HomePage);

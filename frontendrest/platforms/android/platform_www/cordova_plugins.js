@@ -1,12 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
-    "id": "phonegap-nfc.NFC",
-    "file": "plugins/phonegap-nfc/www/phonegap-nfc.js",
-    "pluginId": "phonegap-nfc",
-    "runs": true
-  },
-  {
     "id": "cordova-plugin-device.device",
     "file": "plugins/cordova-plugin-device/www/device.js",
     "pluginId": "cordova-plugin-device",
@@ -15,11 +9,11 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-splashscreen.SplashScreen",
-    "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-    "pluginId": "cordova-plugin-splashscreen",
+    "id": "cordova-plugin-hotspot.HotSpotPlugin",
+    "file": "plugins/cordova-plugin-hotspot/www/HotSpotPlugin.js",
+    "pluginId": "cordova-plugin-hotspot",
     "clobbers": [
-      "navigator.splashscreen"
+      "cordova.plugins.hotspot"
     ]
   },
   {
@@ -31,24 +25,30 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-hotspot.HotSpotPlugin",
-    "file": "plugins/cordova-plugin-hotspot/www/HotSpotPlugin.js",
-    "pluginId": "cordova-plugin-hotspot",
+    "id": "cordova-plugin-splashscreen.SplashScreen",
+    "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+    "pluginId": "cordova-plugin-splashscreen",
     "clobbers": [
-      "cordova.plugins.hotspot"
+      "navigator.splashscreen"
     ]
+  },
+  {
+    "id": "phonegap-nfc.NFC",
+    "file": "plugins/phonegap-nfc/www/phonegap-nfc.js",
+    "pluginId": "phonegap-nfc",
+    "runs": true
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "phonegap-nfc": "0.7.1",
-  "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-device": "2.0.1",
-  "cordova-plugin-splashscreen": "5.0.2",
-  "cordova-plugin-ionic-webview": "1.1.16",
+  "cordova-plugin-hotspot": "1.2.10",
   "cordova-plugin-ionic-keyboard": "2.0.5",
-  "cordova-plugin-hotspot": "1.2.10"
+  "cordova-plugin-ionic-webview": "1.1.16",
+  "cordova-plugin-splashscreen": "5.0.2",
+  "cordova-plugin-whitelist": "1.3.3",
+  "phonegap-nfc": "0.7.1"
 };
 // BOTTOM OF METADATA
 });

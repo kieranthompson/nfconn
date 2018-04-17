@@ -50,7 +50,7 @@ export class AuthService {
         });
     }
     adduser(user) {
-        let creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid;
+        let creds = "name=" + user.name + "&password=" + user.password + "&wifi_ssid=" + user.wifi_ssid + "&wifi_password=" + user.wifi_password;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         

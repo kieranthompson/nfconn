@@ -60,5 +60,10 @@
     "platforms": [
       "android"
     ]
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "license": "ISC"
 }
