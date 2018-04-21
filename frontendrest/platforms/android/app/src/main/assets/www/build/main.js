@@ -109,6 +109,7 @@ var UserPage = (function () {
         this.alertCtrl = alertCtrl;
         this.nfc = nfc;
         this.ndef = ndef;
+        this.infobool = false;
     }
     UserPage.prototype.resetScanData = function () {
         this.granted = false;
@@ -127,13 +128,6 @@ var UserPage = (function () {
             alert('NFC IS SUPPORTED BY YOUR DEVICE');
         }).catch(function (reject) {
             alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
-        });
-        this.authservice.getinfo().then(function (data) {
-            if (data.success) {
-                _this.user.name = data.user.name;
-                _this.user.ssid = data.user.ssid;
-                _this.user.wifi_password = data.user.wifi_password;
-            }
         });
     };
     UserPage.prototype.addListenNFC = function () {
@@ -175,11 +169,12 @@ var UserPage = (function () {
                 });
                 alert_1.present(alert_1);
             }
+            _this.infobool = !_this.infobool;
         });
     };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.wifi_ssid}}</p>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
+            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <div *ngIf="infobool">\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.ssid}}</p>\n</div>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
     ], UserPage);

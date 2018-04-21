@@ -59,7 +59,12 @@ var functions = {
         if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1];
             var decodedtoken = jwt.decode(token, config.secret);
-            return res.json({success: true, msg: 'hello '+decodedtoken.name, name: decodedtoken.name, wifi_ssid: decodedtoken.wifi_ssid});
+            return res.json({
+                            success: true, 
+                            msg: 'hello '+decodedtoken.name + ' ssid: ' +  decodedtoken.wifi_ssid + ' password: ' + decodedtoken.wifi_password,
+                            wifi_ssid: decodedtoken.wifi_ssid, 
+                            wifi_password: decodedtoken.wifi_password
+                        });
         }
         else {
             return res.json({success:false, msg: 'No header'});

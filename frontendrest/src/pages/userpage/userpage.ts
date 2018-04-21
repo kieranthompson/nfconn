@@ -28,6 +28,7 @@ export class UserPage {
     ssid : "",
     wifi_password: ""
   };
+  infobool =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController, public nfc: NFC, public ndef: Ndef) {
     
@@ -100,6 +101,7 @@ export class UserPage {
         });
         alert.present(alert);
     }
+    this.infobool = !this.infobool;
   });
 }
 
