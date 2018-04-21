@@ -80,6 +80,20 @@ export class AuthService {
         })
     }
     
+    getWifi() {
+        return new Promise(resolve => {
+            let headers = new Headers();
+            this.loadUserCredentials();
+            console.log(this.AuthToken);
+            headers.append('Authorization', 'Bearer ' + this.AuthToken);
+            this.http.get('http://54.88.11.212:3333/getWifi', {headers: headers}).subscribe(data => {
+                if(data.json().success) 
+                    resolve(data.json());
+                else
+                    resolve(false);
+            });
+        });
+    }
     logout() {
         this.destroyUserCredentials();
     }

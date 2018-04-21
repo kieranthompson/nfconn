@@ -69,6 +69,21 @@ var functions = {
         else {
             return res.json({success:false, msg: 'No header'});
         }
+    },
+
+    getWifi: function(req, res) {
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+            let token = req.headers.authorization.split(' ')[1];
+            let decodedtoken = jwt.decode(token, config.secret);
+            return res.json({
+                success: true,
+                ssid: decodedtoken.wifi_ssid,
+                password: decodedtoken.wifi_password
+            });
+        }
+        else {
+            return res.json({success: false, msg: 'No header'});
+        }
     }
     
     
