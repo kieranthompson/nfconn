@@ -162,6 +162,9 @@ var UserPage = (function () {
         var _this = this;
         this.authservice.getinfo().then(function (data) {
             if (data.success) {
+                _this.user.ssid = data.wifi_ssid;
+                _this.user.wifi_password = data.wifi_password;
+                _this.infobool = !_this.infobool;
                 var alert_1 = _this.alertCtrl.create({
                     title: data.success,
                     subTitle: data.msg,
@@ -169,12 +172,21 @@ var UserPage = (function () {
                 });
                 alert_1.present(alert_1);
             }
-            _this.infobool = !_this.infobool;
+        });
+    };
+    UserPage.prototype.getWifi = function () {
+        var _this = this;
+        this.authservice.getWifi().then(function (data) {
+            if (data.success) {
+                _this.user.ssid = data.wifi_ssid;
+                _this.user.wifi_password = data.wifi_password;
+                _this.infobool = !_this.infobool;
+            }
         });
     };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <div *ngIf="infobool">\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.ssid}}</p>\n</div>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
+            selector: 'page-userpage',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>NFConn</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h2>NFConn</h2>\n  <div *ngIf="infobool">\n  <p>Welcome {{user.name}}!</p>\n  <p>Current Wifi Network: {{user.ssid}}</p>\n</div>\n  <button ion-button (click)=\'logout()\'>Logout</button>\n  <button ion-button (click)=\'getInfo()\'>GetInfo</button>\n  <button ion-button (click)=\'getWifi()\'>getWifiCreds</button>\n</ion-content>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/userpage/userpage.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__services_authservice__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["a" /* NFC */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_nfc__["b" /* Ndef */]])
     ], UserPage);
@@ -471,6 +483,21 @@ var AuthService = (function () {
             console.log(_this.AuthToken);
             headers.append('Authorization', 'Bearer ' + _this.AuthToken);
             _this.http.get('http://54.88.11.212:3333/getinfo', { headers: headers }).subscribe(function (data) {
+                if (data.json().success)
+                    resolve(data.json());
+                else
+                    resolve(false);
+            });
+        });
+    };
+    AuthService.prototype.getWifi = function () {
+        var _this = this;
+        return new Promise(function (resolve) {
+            var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+            _this.loadUserCredentials();
+            console.log(_this.AuthToken);
+            headers.append('Authorization', 'Bearer ' + _this.AuthToken);
+            _this.http.get('http://54.88.11.212:3333/getWifi', { headers: headers }).subscribe(function (data) {
                 if (data.json().success)
                     resolve(data.json());
                 else

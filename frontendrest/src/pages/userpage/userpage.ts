@@ -94,6 +94,9 @@ export class UserPage {
   getInfo(): void {
     this.authservice.getinfo().then((data: any) => {
     if(data.success) {
+      this.user.ssid = data.wifi_ssid;
+      this.user.wifi_password = data.wifi_password;
+      this.infobool = !this.infobool;
         let alert = this.alertCtrl.create({
             title: data.success,
             subTitle: data.msg,
@@ -101,7 +104,17 @@ export class UserPage {
         });
         alert.present(alert);
     }
-    this.infobool = !this.infobool;
+    
+  });
+}
+
+getWifi(): void {
+  this.authservice.getWifi().then((data: any) => {
+    if(data.success) {
+      this.user.ssid = data.wifi_ssid;
+      this.user.wifi_password = data.wifi_password;
+      this.infobool = !this.infobool;
+    }
   });
 }
 
