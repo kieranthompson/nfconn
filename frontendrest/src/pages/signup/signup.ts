@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
+import { Storage } from '@ionic/storage';
+import { AndroidFingerprintAuth } from '@ionic-native/android-fingerprint-auth';
 import { AuthService } from '../../services/authservice';
 import { HomePage } from '../home/home';
 
@@ -12,11 +14,8 @@ import { HomePage } from '../home/home';
 export class SignupPage {
   newcreds = {name: '', password: '', wifi_ssid: '', wifi_password: ''};
   networks: any;
-  constructor(public navParams: NavParams, public navCtrl: NavController, public authservice: AuthService, public alertCtrl: AlertController, private hotspot: Hotspot) {
+  constructor(public navParams: NavParams,public storage: Storage, public fingerprint: AndroidFingerprintAuth, public navCtrl: NavController, public authservice: AuthService, public alertCtrl: AlertController, private hotspot: Hotspot) {
     
-  }
-  OnInit() {
-
   }
 
   ionViewDidLoad(){
@@ -35,13 +34,19 @@ export class SignupPage {
         });
         alert.present();
         this.navCtrl.setRoot(HomePage);
-
+        this.storeCredentials();
       }
     });
   }
 
   setWifiCredentials(wifi_ssid) {
     this.newcreds.wifi_ssid = wifi_ssid;
+  }
+
+
+  storeCredentials(): void {
+    this.storage.set('username', this.newcreds.name);
+    this.storage.set('password', this.newcreds.password);
   }
 
 }

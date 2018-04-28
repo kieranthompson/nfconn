@@ -37,6 +37,30 @@ module.exports = [
     "file": "plugins/phonegap-nfc/www/phonegap-nfc.js",
     "pluginId": "phonegap-nfc",
     "runs": true
+  },
+  {
+    "id": "cordova-plugin-android-fingerprint-auth.FingerprintAuth",
+    "file": "plugins/cordova-plugin-android-fingerprint-auth/www/FingerprintAuth.js",
+    "pluginId": "cordova-plugin-android-fingerprint-auth",
+    "clobbers": [
+      "FingerprintAuth"
+    ]
+  },
+  {
+    "id": "cordova-sqlite-storage.SQLitePlugin",
+    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+    "pluginId": "cordova-sqlite-storage",
+    "clobbers": [
+      "SQLitePlugin"
+    ]
+  },
+  {
+    "id": "phonegap-plugin-barcodescanner.BarcodeScanner",
+    "file": "plugins/phonegap-plugin-barcodescanner/www/barcodescanner.js",
+    "pluginId": "phonegap-plugin-barcodescanner",
+    "clobbers": [
+      "cordova.plugins.barcodeScanner"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -48,7 +72,10 @@ module.exports.metadata =
   "cordova-plugin-ionic-webview": "1.1.16",
   "cordova-plugin-splashscreen": "5.0.2",
   "cordova-plugin-whitelist": "1.3.3",
-  "phonegap-nfc": "0.7.1"
+  "phonegap-nfc": "0.7.1",
+  "cordova-plugin-android-fingerprint-auth": "1.4.3",
+  "cordova-sqlite-storage": "2.3.1",
+  "phonegap-plugin-barcodescanner": "7.1.1"
 };
 // BOTTOM OF METADATA
 });

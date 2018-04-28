@@ -63,7 +63,8 @@ var functions = {
                             success: true, 
                             msg: 'hello '+decodedtoken.name + ' ssid: ' +  decodedtoken.wifi_ssid + ' password: ' + decodedtoken.wifi_password,
                             wifi_ssid: decodedtoken.wifi_ssid, 
-                            wifi_password: decodedtoken.wifi_password
+                            wifi_password: decodedtoken.wifi_password,
+                            username: decodedtoken.name
                         });
         }
         else {
@@ -73,8 +74,8 @@ var functions = {
 
     getWifi: function(req, res) {
         if(req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-            let token = req.headers.authorization.split(' ')[1];
-            let decodedtoken = jwt.decode(token, config.secret);
+            var token = req.headers.authorization.split(' ')[1];
+            var decodedtoken = jwt.decode(token, config.secret);
             return res.json({
                 success: true,
                 ssid: decodedtoken.wifi_ssid,

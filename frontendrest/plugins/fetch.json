@@ -2,7 +2,7 @@
   "phonegap-nfc": {
     "source": {
       "type": "registry",
-      "id": "phonegap-nfc"
+      "id": "phonegap-nfc@^0.7.1"
     },
     "is_top_level": true,
     "variables": {}
@@ -61,6 +61,30 @@
       "id": "cordova-plugin-compat@^1.0.0"
     },
     "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-android-fingerprint-auth": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-fingerprint-auth"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-sqlite-storage": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-sqlite-storage"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "phonegap-plugin-barcodescanner": {
+    "source": {
+      "type": "registry",
+      "id": "phonegap-plugin-barcodescanner@7.1.1"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }

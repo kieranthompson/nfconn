@@ -19,71 +19,50 @@ import { Observable } from 'rxjs/Observable';
 })
 export class UserPage {
 
-  granted: boolean;
-  denied: boolean;
-  scanned: boolean;
-  tagId: string;
-  user: {
-    name: "",
-    ssid : "",
-    wifi_password: ""
-  };
+  username: string;
+  ssid: string;
+  wifi_password: string;
   infobool =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController, public nfc: NFC, public ndef: Ndef) {
-    
-  }
-
-
-  resetScanData() {
-    this.granted = false;
-    this.scanned = false;
-    this.tagId = "";
+    this.username = '';
+    this.ssid = 'this is my ssid';
+    this.wifi_password = ' ';
   }
 
   ionViewDidEnter() {
-    this.nfc.enabled().then((resolve) => {
-      this.addListenNFC();
-      let successAlert = this.alertCtrl.create({
-        title: 'Success',
-        subTitle: 'logged in successfully'
-      });
-      successAlert.present();
-      alert('NFC IS SUPPORTED BY YOUR DEVICE');
-    }).catch((reject) => {
-      
-      alert('NFC IS NOT SUPPORTED BY YOUR DEVICE');
-      
-    });
+    this.shareWifi();
   }
 
-  addListenNFC() {
+  shareWifi(): void {
+    this.authservice.getinfo().then((data: any) => {
+      if(data.success) {
+        this.username = data.username;
+        console.log('current user: ' + data.username);
+        this.ssid = data.wifi_ssid;
+        this.wifi_password = data.wifi_password;
+        this.infobool = !this.infobool;
+        console.log(this.ssid);
+        console.log(this.wifi_password);
+        
+        let creds: string = this.ssid + '&%&' + this.wifi_password;
+        console.log(creds);
+        let message = this.ndef.textRecord(creds, null, null);
 
-    this.nfc.addTagDiscoveredListener(nfcEvent => this.sesReadNFC(nfcEvent.tag)).subscribe(data => {
-      if (data && data.tag && data.tag.id) {
-        let tagId = this.nfc.bytesToHexString(data.tag.id);
-        if (tagId) {
-          this.tagId = tagId;
-          this.scanned = true;
+        this.nfc.share([message]).then(() => {
 
-          // only testing data consider to ask web api for access
-          this.granted = [
-            "7d3c6179"
-          ].indexOf(tagId) != -1;
+          this.alertCtrl.create({
+          title: 'Sent!',
+          subTitle: 'Your wifi credentials have been sent: ' + creds,
+          buttons: ['ok']
+      }).present();
 
-        } else {
-          alert('NFC_NOT_DETECTED');
-        }
+    }).catch(err => {
+      console.log(err);
+    })
       }
     });
-  }
-
-  sesReadNFC(data): void {
-
-  }
-
-  failNFC(err) {
-    alert("Error while reading: Please Retry");
+    
   }
 
   logout(): void {
@@ -93,10 +72,7 @@ export class UserPage {
   
   getInfo(): void {
     this.authservice.getinfo().then((data: any) => {
-    if(data.success) {
-      this.user.ssid = data.wifi_ssid;
-      this.user.wifi_password = data.wifi_password;
-      this.infobool = !this.infobool;
+      if(data.success) {
         let alert = this.alertCtrl.create({
             title: data.success,
             subTitle: data.msg,
@@ -109,11 +85,15 @@ export class UserPage {
 }
 
 getWifi(): void {
-  this.authservice.getWifi().then((data: any) => {
+  this.authservice.getinfo().then((data: any) => {
     if(data.success) {
-      this.user.ssid = data.wifi_ssid;
-      this.user.wifi_password = data.wifi_password;
+      this.username = data.username;
+      console.log('current user: ' + data.username);
+      this.ssid = data.wifi_ssid;
+      this.wifi_password = data.wifi_password;
       this.infobool = !this.infobool;
+      console.log(this.ssid);
+      console.log(this.wifi_password);
     }
   });
 }
