@@ -45,6 +45,8 @@ export class SignupPage {
 
 
   storeCredentials(): void {
+    this.storage.remove('username');
+    this.storage.remove('password');
     this.storage.set('username', this.newcreds.name);
     this.storage.set('password', this.newcreds.password);
   }

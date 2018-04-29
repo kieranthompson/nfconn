@@ -1,3 +1,5 @@
+import { LegacyqrPage } from './../pages/legacyqr/legacyqr';
+import { GetqrPage } from './../pages/getqr/getqr';
 
 import { GuestPage } from './../pages/guest/guest';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,7 +28,9 @@ import { Hotspot } from '@ionic-native/hotspot';
     HomePage,
     UserPage,
     SignupPage,
-    GuestPage
+    GuestPage,
+    GetqrPage,
+    LegacyqrPage
     
   ],
   imports: [
@@ -43,7 +47,9 @@ import { Hotspot } from '@ionic-native/hotspot';
     HomePage,
     UserPage,
     SignupPage,
-    GuestPage
+    GuestPage,
+    GetqrPage,
+    LegacyqrPage
   ],
   providers: [
     StatusBar,

@@ -1,3 +1,4 @@
+import { GetqrPage } from './../getqr/getqr';
 import { AndroidFingerprintAuth } from '@ionic-native/android-fingerprint-auth';
 import { Storage } from '@ionic/storage';
 import { GuestPage } from './../guest/guest';
@@ -69,6 +70,10 @@ export class HomePage {
 
   guestPage() {
     this.navCtrl.push(GuestPage);
+  }
+
+  getqrPage() {
+    this.navCtrl.setRoot(GetqrPage);
   }
 
   presentLoadingDefault() {

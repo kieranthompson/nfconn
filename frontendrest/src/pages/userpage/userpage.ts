@@ -1,16 +1,10 @@
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/authservice';
 import { HomePage } from '../home/home';
 import { NFC, Ndef } from '@ionic-native/nfc';
 import { Observable } from 'rxjs/Observable';
-
-/**
- * Generated class for the UserpagePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -22,6 +16,8 @@ export class UserPage {
   username: string;
   ssid: string;
   wifi_password: string;
+  qrData: string = null;
+  createdCode = null;
   infobool =false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authservice: AuthService, public alertCtrl: AlertController, public nfc: NFC, public ndef: Ndef) {
@@ -32,6 +28,10 @@ export class UserPage {
 
   ionViewDidEnter() {
     this.shareWifi();
+  }
+
+  createCode() {
+    this.createdCode = this.qrData;
   }
 
   shareWifi(): void {
@@ -45,7 +45,7 @@ export class UserPage {
         console.log(this.ssid);
         console.log(this.wifi_password);
         
-        let creds: string = this.ssid + '&%&' + this.wifi_password;
+        let creds: string = this.qrData = this.ssid + '&%&' + this.wifi_password;
         console.log(creds);
         let message = this.ndef.textRecord(creds, null, null);
 
