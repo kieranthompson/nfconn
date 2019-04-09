@@ -71,7 +71,7 @@ var TabsPage = (function () {
     }
     TabsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-tabs',template:/*ion-inline-start:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/tabs/tabs.html"*/'<ion-tabs>\n    <ion-tab [root]="homeRoot" tabTitle="Home" tabIcon="information-circle"></ion-tab>\n    <ion-tab [root]="wifilistRoot" tabTitle="Wifilist" tabIcon="information-circle"></ion-tab>\n    <ion-tab [root]="settingsRoot" tabTitle="Settings" tabIcon="information-circle"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/kieran/Desktop/finalyearproject/frontendrest/src/pages/tabs/tabs.html"*/
+            selector: 'page-tabs',template:/*ion-inline-start:"/Users/thkie/Desktop/nfconn/frontendrest/src/pages/tabs/tabs.html"*/'<ion-tabs>\n    <ion-tab [root]="homeRoot" tabTitle="Home" tabIcon="information-circle"></ion-tab>\n    <ion-tab [root]="wifilistRoot" tabTitle="Wifilist" tabIcon="information-circle"></ion-tab>\n    <ion-tab [root]="settingsRoot" tabTitle="Settings" tabIcon="information-circle"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Users/thkie/Desktop/nfconn/frontendrest/src/pages/tabs/tabs.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
     ], TabsPage);

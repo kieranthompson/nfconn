@@ -1,4 +1,4 @@
-#Sun Apr 29 18:11:19 IST 2018
-base.0=/Users/kieran/Desktop/finalyearproject/frontendrest/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+#Tue Apr 09 13:08:06 IST 2019
+base.0=/Users/thkie/Desktop/nfconn/frontendrest/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
 renamed.0=classes.dex
-file.0=/Users/kieran/Desktop/finalyearproject/frontendrest/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex

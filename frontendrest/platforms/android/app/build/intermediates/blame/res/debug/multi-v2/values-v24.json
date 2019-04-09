@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kieran/Desktop/finalyearproject/frontendrest/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/Users/thkie/Desktop/nfconn/frontendrest/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/Users/kieran/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/cddfb93d50aeb2231b922837a0dbecc4/res/values-v24/values-v24.xml",
+                    "source": "/Users/thkie/.gradle/caches/transforms-1/files-1.1/support-media-compat-27.1.1.aar/21042d3a7f950e911f27bd44c5a6059a/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

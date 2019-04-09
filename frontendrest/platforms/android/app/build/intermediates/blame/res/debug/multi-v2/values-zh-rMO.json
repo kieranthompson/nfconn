@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kieran/Desktop/finalyearproject/frontendrest/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rMO/values-zh-rMO.xml",
+            "outputFile": "/Users/thkie/Desktop/nfconn/frontendrest/platforms/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rMO/values-zh-rMO.xml",
             "map": [
                 {
-                    "source": "/Users/kieran/Desktop/finalyearproject/frontendrest/platforms/android/app/src/main/res/values-zh-rMO/fpauth-strings.xml",
+                    "source": "/Users/thkie/Desktop/nfconn/frontendrest/platforms/android/app/src/main/res/values-zh-rMO/fpauth-strings.xml",
                     "from": {
                         "startLines": "17,19,21,22,23,24,27,25,20,26,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
